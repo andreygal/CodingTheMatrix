@@ -1,13 +1,21 @@
 def center_pts(comp_set):
     pts = list(comp_set)
     print(pts)
-    center = pts[0]
-    for i in (1, len(pts) - 1):
-        pt1 = center
-        pt2 = pts[i]
-        center = (pt1 - pt2) / 2
-        cent_set = set()
-        print(center)
+    #find the center
+    maxX, maxY, minX, minY = pts[0].real, pts[0].imag, pts[0].real, pts[0].imag
+    for i in pts:
+        if i.real > maxX:
+            maxX = i.real
+        if i.imag > maxY:
+            maxY = i.imag
+        if i.real < minX:
+            minX = i.real
+        if i.imag < minY:
+            minY = i.imag
+    center = complex(minX+(maxX-minX)/2, minY+((maxY - minY)/2))
+    print(center, maxX, maxY, minX, minY)
+    cent_set = set()
+    #transalte the points
     while comp_set:
         trans_pt = comp_set.pop()
         new_pt = trans_pt - center
